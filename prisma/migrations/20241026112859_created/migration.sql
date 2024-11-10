@@ -1,0 +1,5 @@
+-- CreateTable
+CREATE TABLE "Region" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "region" TEXT NOT NULL
+);

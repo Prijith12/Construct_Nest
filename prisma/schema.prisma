@@ -69,3 +69,8 @@ model Post {
   id Int @id @default(autoincrement())
   //need more fields
 }
+
+model Region {
+  id Int @id @default(autoincrement())
+  region String
+}
