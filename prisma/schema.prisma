@@ -26,8 +26,10 @@ feedback FeedBack?
 model ServiceProvider {
   id Int @id @default(autoincrement()) 
   name String
-  service String 
-  rating Int?
+  service String
+  mobile String
+  rating Int
+  image String
 }
 
 model Product {
