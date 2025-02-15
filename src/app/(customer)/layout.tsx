@@ -16,7 +16,7 @@ export default function AdminLayout({children,}:Readonly<{
     
     return(
         <>
-        <Nav backGround="bg-gray-100" navBarLinks={navBarLinks}/>
+        <Nav backGround="bg-white" navBarLinks={navBarLinks}/>
         <div className="min-h-screen pt-20">
         {children}
         </div>

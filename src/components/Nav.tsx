@@ -96,7 +96,7 @@ const AuthMenu = ({ loggedIn, name, email }: { loggedIn: boolean, name: string, 
     const path = usePathname()
     return (
         <Link {...props} className={cn(
-            "text-sm font-semibold text-gray-500",
+            "text-sm font-light text-gray-500 hover:text-blue-600",
             path == props.href && "text-blue-700"
         )} />
     )

@@ -36,6 +36,9 @@ model Product {
   productId Int @id @default(autoincrement())
   name String 
   price Int 
+  rating Int?
+  unit String?
+  image String
   orders Order[]
 }
 

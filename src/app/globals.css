@@ -67,3 +67,9 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer components{
+  .admin-heading{
+    @apply text-lg font-serif font-bold text-center
+  }
+}

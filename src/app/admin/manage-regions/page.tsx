@@ -27,7 +27,7 @@ async function ManageRegions() {
     return (
         <HydrationBoundary state={dehydrate(queryClient)}>
         <div className='px-4 py-4'>
-            <h1 className='text-lg font-serif font-bold text-center'>Manage Regions</h1>
+            <h1 className='admin-heading'>Manage Regions</h1>
             <div className='flex justify-end pt-3 pr-4'>
                 <AddRegions />
             </div>

@@ -10,18 +10,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
-
+import { AlertDialogCom } from '@/components/alert-dialog'
 import {
   Select,
   SelectContent,
@@ -42,18 +31,16 @@ import { addServiceProvider } from '@/services/service-providers'
 
 
 type AddProviders = Omit<Providers, 'id'> & { id?: number}
-type DailogState={
-  alertDialog:boolean
-  dialog:boolean
-}
+
 const providerSchema=z.object({
   name:z.string().min(1,{message:"Name is required"}),
   service:z.string().min(1,{message:"Service is required"}),
-  mobile:z.string().regex(/^\d{10}$/,{message:"Mobile number is not valid"}),
+  mobile:z.string().regex(/^\d{10}$/,{message:"Mobile number is not valid or missing"}),
   });
 
 function AddProviders() {
-  const [dialogOpen, setDialogOpen] = useState<DailogState>({alertDialog:false,dialog:false});
+  const [dialog, setDialogOpen] = useState<{dialogOpen:boolean}>({dialogOpen:false});
+  const [alertDialogOpen,setAltDialogOpen]=useState<boolean>(false);
   const [errors, setErrors] = useState<z.ZodIssue[]|[{message:string}]>([]);
   const [provider, setProvider] = useState<AddProviders>({ name: '', service: '', mobile: '',image:'', rating: 5 });
   const [file,setFile]=useState<File|null>(null);
@@ -64,7 +51,6 @@ function AddProviders() {
   const handleFormUpload=async()=>{
     const response=await apiRequest({url:'/api/file-upload',method:'POST',body:appendFile});
     const updatedProvider = { ...provider, image: response?.fileName };
-    console.log(updatedProvider);
     await addServiceProvider(updatedProvider);
   }
 
@@ -75,7 +61,7 @@ function AddProviders() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['service-providers'] });
       setProvider({ name: '', service: '', mobile: '',image:'',rating: 5 });
-      setDialogOpen({...dialogOpen,dialog:false});
+      setDialogOpen({dialogOpen:false});
     },
     onError: (e) => {
       router.push(`/error/${e}`);
@@ -87,12 +73,12 @@ function AddProviders() {
     const validate= providerSchema.safeParse(provider);
     if(!validate.success){
       setErrors(validate.error.errors);
-      setDialogOpen({dialog:false,alertDialog:true});
+      setAltDialogOpen(true);
       return;
     }
     if(!file){
       setErrors([{message:'Image is Required'}]);
-      setDialogOpen({dialog:false,alertDialog:true});
+      setAltDialogOpen(true);
       return;
     }
     appendFile=new FormData();
@@ -103,7 +89,7 @@ function AddProviders() {
 
   return (
     <>
-    <Dialog open={dialogOpen.dialog} onOpenChange={(open)=>setDialogOpen((prev)=>({...prev,dialog:open}))}>
+    <Dialog open={dialog.dialogOpen} onOpenChange={(open)=>setDialogOpen({dialogOpen:open})}>
       <DialogTrigger asChild>
         <Button variant="default" className='mt-6 md:mt-1'>Add New Service Provider</Button>
       </DialogTrigger>
@@ -116,7 +102,7 @@ function AddProviders() {
         </div>
       </DialogContent>
     </Dialog>
-    <AlertDialogCom dialogOpen={dialogOpen} setDialogOpen={setDialogOpen} errors={errors}/>
+    <AlertDialogCom alertDialogOpen={alertDialogOpen} setAltDialogOpen={setAltDialogOpen} errors={errors}/>
     </>
   )
 }
@@ -141,11 +127,10 @@ const AddProvidersForm = ({ handleSubmit, setProvider, provider, loading,setFile
         <Input type='number' placeholder='Mobile Number' value={provider.mobile} onChange={(e) => { setProvider({ ...provider, mobile: e.target.value }) }} disabled={loading} />
         <Input type='file' onChange={handleFileChange}/>
         {imagePreview &&
-        <div className='w-24 h-20'>  
+        <div className='w-24 h-20 overflow-hidden'>  
           <Image alt='not found..' src={imagePreview} height={100} width={100}/>
         </div>
 }
-
         <Select onValueChange={(value)=>{setProvider({...provider,rating:parseInt(value)})}}>
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Select rating" />
@@ -161,38 +146,14 @@ const AddProvidersForm = ({ handleSubmit, setProvider, provider, loading,setFile
             </SelectGroup>
           </SelectContent>
         </Select>
+        </div>
         <div className='flex justify-end mt-3'>
           <Button type='submit' disabled={loading}>{loading ? 'Adding...' : 'Submit'}</Button>
         </div>
-      </div>
     </form>
   )
 }
 
-const AlertDialogCom=({dialogOpen,setDialogOpen,errors}:{dialogOpen:DailogState,setDialogOpen:React.Dispatch<React.SetStateAction<DailogState>>,errors:z.ZodIssue[]|[{message:string}]})=>{
-  return(
-    <AlertDialog open={dialogOpen.alertDialog} onOpenChange={(open)=>setDialogOpen((prev)=>({...prev,alertDialog:open}))}>
-  <AlertDialogContent>
-    <AlertDialogHeader>
-      <AlertDialogTitle>Validation Errors.</AlertDialogTitle>
-      <AlertDialogDescription>
-        <ul className='list-disc'>
-        {
-          errors.map((error,index)=>(
-            <li className='text-red-600'key={index}>{error.message}</li>
-          ))
-        }
-        </ul>
 
-      </AlertDialogDescription>
-    </AlertDialogHeader>
-    <AlertDialogFooter>
-      <AlertDialogAction>Continue</AlertDialogAction>
-    </AlertDialogFooter>
-  </AlertDialogContent>
-</AlertDialog>
-
-  )
-}
 
 export default AddProviders
