@@ -120,7 +120,7 @@ const SideBar = ({ backGround,sideBarLinks }: { backGround: string,sideBarLinks:
                         </h1>
                     </div>
                 </SheetHeader>
-                <div className="mt-10 flex flex-col border-t-2">
+                <div className="mt-10 flex flex-col border-t-2 border-blue-100">
                     { sideBarLinks.length >0 ? (
                         sideBarLinks.map((link,index)=>(
                             <SideBarLink backGround={backGround} href={link.href} key={index}>{link.label}</SideBarLink>
@@ -137,7 +137,7 @@ const SideBarLink = ({backGround,...props}:{backGround:string} & Omit<React.Comp
     const path=usePathname()
     return (
         <SheetClose asChild>
-        <Link {...props} className={cn("flex items-center justify-center w-full h-14  border-b-2 border-gray-300 rounded-sm hover:bg-gray-200 text-sm font-semibold text-gray-500",backGround,
+        <Link {...props} className={cn("flex items-center justify-center w-full h-14  border-b-2 border-blue-100 rounded-sm hover:bg-gray-200 text-sm font-light text-black font-serif",backGround,
             path==props.href && "bg-gray-200 bg-opacity-55 text-gray-600 "
         )}/>
         </SheetClose>
