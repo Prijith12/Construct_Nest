@@ -3,6 +3,7 @@ import "./globals.css";
 import { Inter as FontSans } from "next/font/google"
 import { cn } from "@/lib/utils"
 import Providers from "@/providers/query-client-providers";
+import { UserProvider } from '@auth0/nextjs-auth0/client';
 
 
 const fontSans = FontSans({
@@ -27,9 +28,11 @@ export default function RootLayout({
           "min-h-screen bg-background font-sans antialiased",
           fontSans.variable
         )}>
+          <UserProvider>
           <Providers>
           {children}
           </Providers>
+          </UserProvider>
           </body>
     </html>
   );

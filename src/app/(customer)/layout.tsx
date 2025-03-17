@@ -8,10 +8,10 @@ export default function AdminLayout({children,}:Readonly<{
 }>){
 
     const navBarLinks=[
-        {href:"/admin", label:"Dashboard"},
-        {href:"/admin/service-providers",label:"ServiceProviders"},
-        {href:"/admin/manage-regions",label:"Manage Regions"},
-        {href:"/admin/manage-products",label:"Manage Products"}
+        {href:"/", label:"Home"},
+        {href:"#providers",label:"ServiceProviders"},
+        {href:"/#regions",label:"Regions"},
+        {href:"/#products",label:"Products"}
     ]
     
     return(

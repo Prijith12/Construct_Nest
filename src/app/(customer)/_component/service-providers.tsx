@@ -18,7 +18,7 @@ function ServiceProviders() {
   const [isSubscribed, setIsSubscribed] = useState<boolean>(false);
   const serviceproviders = [{ service: "Plumbing", name: "Thankachan", image: "Plumbing 2025-02-28 224631.jpeg", mobile: "9048649306", rating: 5 }, { service: "Plumbing", name: "Thankachan", image: "Plumbing 2025-02-28 224631.jpeg", mobile: "9048649306", rating: 2 }, { service: "Plumbing", name: "Thankachan", image: "Plumbing 2025-02-28 224631.jpeg", mobile: "9048649306", rating: 3 }, { service: "Plumbing", name: "Thankachan", image: "Plumbing 2025-02-28 224631.jpeg", mobile: "9048649306", rating: 4 }]
   return (
-    <div className='m-4 md:m-7'>
+    <div className='m-4 md:m-7' id='providers'>
       <h1 className='text-center text-2xl md:text-4xl font-serif font-extralight italic text-gray-700 pt-9 md:pt-12 pb-2 md:pb-3' >Service Providers</h1>
       <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4'>
         {

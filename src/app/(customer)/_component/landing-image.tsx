@@ -8,7 +8,7 @@ import { MessageSquare } from 'lucide-react'
 function LandingImage() {
   return (
     <div>
-        <div className="w-full relative h-[45dvh] md:h-[70dvh]"> {/* Adjust height as needed */}
+        <div className="w-full relative h-[45dvh] md:h-[70dvh]"> 
                 <Image
                     src="/home-page-img3.png"
                     alt="Construction Site"

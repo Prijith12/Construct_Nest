@@ -14,10 +14,10 @@ function ServiceHighlights() {
     <div className="flex justify-center px-2">
       <div>
     <div className="mt-16 md:mt-12 px-4 text-center">
-      <h1 className="py-2 md:py-4 text-2xl md:text-4xl font-serif font-extralight italic text-gray-700">
+      <h1 className="py-2 md:py-4 text-2xl md:text-4xl font-serif font-extralight italic text-gray-700" id="regions">
         From dream homes to repairs, we’ve got you covered!
       </h1>
-      <h1 className="py-5 md:py-8 text-lg md:text-xl font-light italic text-gray-700 tracking-wide drop-shadow-md">
+      <h1 className="py-5 md:py-8 text-lg md:text-xl font-light italic text-gray-700 tracking-wide drop-shadow-md" >
         Check our service areas—we're expanding for you!
       </h1>
       </div>
@@ -36,7 +36,7 @@ function ServiceHighlights() {
 const LocationCard = ({children}:{children:React.ReactNode}) => {
 
   return (
-    <Card className="w-auto h-auto flex flex-col items-center p-4">
+    <Card className="w-auto h-auto flex flex-col items-center p-4" >
       <MapPin className="py-2"/>
       <h1 className="text-sm md:text-base italic font-serif">{children}</h1>
     </Card>
