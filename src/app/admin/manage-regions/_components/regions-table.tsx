@@ -6,12 +6,10 @@ import { ColumnDef } from '@tanstack/react-table';
 import { Button } from '@/components/ui/button';
 import { Trash2 } from 'lucide-react';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { fetchRegions } from '../page';
 import { SingleSkeleton } from '@/components/loading/Loading';
 import { useQueryClient } from '@tanstack/react-query';
 import { apiRequest } from '@/lib/api';
-
-
+import { fetchRegions } from '../page';
 export type Regions = {
     id: number
     region: string
