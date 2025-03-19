@@ -8,21 +8,26 @@ import { Trash2 } from 'lucide-react';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { SingleSkeleton } from '@/components/loading/Loading';
 import { useQueryClient } from '@tanstack/react-query';
+import { allRegion } from '@/services/regions';
 import { apiRequest } from '@/lib/api';
-import { fetchRegions } from '../page';
+import { log } from 'console';
+
 export type Regions = {
     id: number
     region: string
 }
 
-
-
+export const allRegionsQuery=async()=>{
+    const data=await allRegion();
+    return data;
+}
 
 function RegionsTable() {
 
     const queryClient=useQueryClient()
-    const { data: regions, isLoading } = useQuery({ queryKey: ['regions'], queryFn: fetchRegions });
-
+    const { data: regions, isLoading } = useQuery({ queryKey: ['regions'], queryFn:allRegionsQuery});
+    console.log(regions);
+    
     const {mutate,isPending}=useMutation({
         mutationFn:({id}:{id:number})=>{
             return apiRequest({ url: '/api/region', body: { id }, method: 'DELETE' });
@@ -65,7 +70,7 @@ function RegionsTable() {
     if (isLoading||isPending) return <><SingleSkeleton /></>
     return (
         <div>
-            <DataTable columns={columns} data={regions ? regions.data : []} />
+            <DataTable columns={columns} data={regions ? regions : []} />
         </div>
     )
 }

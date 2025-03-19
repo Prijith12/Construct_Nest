@@ -5,7 +5,7 @@ import type { Product } from "@/app/admin/manage-products/page";
 
 export const allProducts = async () => {
     try {
-        const data = await db.product.findMany();
+        const data = await db.product.findMany();      
         return data;
     } catch (e) {
         throw new Error(e instanceof Error ? e.message : "Internal Server Error");

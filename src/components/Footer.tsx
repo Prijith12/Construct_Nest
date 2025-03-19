@@ -11,15 +11,12 @@ import React from "react"
 import { useQuery } from "@tanstack/react-query"
 import type { Regions } from "@/app/admin/manage-regions/_components/regions-table"
 import { Spinner } from "./loading/Loading"
-import { apiRequest } from "@/lib/api"
+import { allRegionsQuery } from "@/app/admin/manage-regions/_components/regions-table"
 
-const fetchRegions = async () => {
-    return apiRequest({ url: '/api/region' });
-}
 
 export default function Footer({ children }: { children: React.ReactNode }) {
 
-    const { data: regions, isLoading } = useQuery({ queryKey: ['regions'], queryFn: fetchRegions });
+    const { data: regions, isLoading } = useQuery({ queryKey: ['regions'], queryFn: allRegionsQuery });
     
     const socilMediaLinks: SocialMediaProps[] = [
         { link: 'https://www.instagram.com/prijith_t/?hl=en', Icon: Instagram, color: "text-red-600", label: 'Instagram' },
@@ -40,7 +37,7 @@ export default function Footer({ children }: { children: React.ReactNode }) {
                                     <AccordionTrigger className="text-xs md:text-sm font-bold">View Current Regions</AccordionTrigger>
                                    {
                                     isLoading? <Spinner/> : 
-                                    regions.data.map((regionsData:Regions)=>(
+                                    regions?.map((regionsData:Regions)=>(
                                         <AccordionContent key={regionsData.id} className="text-xs">
                                         {regionsData?.region}
                                     </AccordionContent>

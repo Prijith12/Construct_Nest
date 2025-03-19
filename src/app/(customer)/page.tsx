@@ -16,7 +16,7 @@ const getData = unstable_cache(
             const regions=await allRegion();
             return { serviceProviders, products,regions };
         } catch (error) {
-            return { serviceProviders: [], products: [],regions:{data:[]} };
+            return { serviceProviders: [], products: [],regions:[] };
         }
     },
     ['service-providers-products-and-regions'], 
@@ -29,7 +29,7 @@ async function HomePage() {
         <div>
             <LandingImage />
             <JoinProviderButton/>
-            <ServiceHighlights regions={data.regions.data||[]}/>
+            <ServiceHighlights regions={data.regions||[]}/>
             <ServiceProviders serviceproviders={data.serviceProviders}/>
             <Products products={data.products}/>
         </div>

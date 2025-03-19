@@ -4,6 +4,7 @@ import RegionsTable from './_components/regions-table'
 
 
 
+
 async function ManageRegions() {
     return (
             <div className='px-4 py-4'>

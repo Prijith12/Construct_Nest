@@ -13,10 +13,10 @@ export const addRegion = async ({ region }: { region: string }) => {
 
 export const allRegion = async () => {
     try {
-        const data =await db.region.findMany();
-        return { success: true, data }
-    } catch (err) {
-        return {success:false,message:err}
+        const data =await db.region.findMany();        
+        return data;
+    } catch (e) {
+        throw new Error(e instanceof Error ? e.message : "Internal Server Error");
     }
 }   
 
