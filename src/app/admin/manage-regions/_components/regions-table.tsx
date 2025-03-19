@@ -10,7 +10,7 @@ import { SingleSkeleton } from '@/components/loading/Loading';
 import { useQueryClient } from '@tanstack/react-query';
 import { allRegion } from '@/services/regions';
 import { apiRequest } from '@/lib/api';
-import { log } from 'console';
+import { deleteRegion } from '@/services/regions';
 
 export type Regions = {
     id: number
@@ -30,7 +30,7 @@ function RegionsTable() {
     
     const {mutate,isPending}=useMutation({
         mutationFn:({id}:{id:number})=>{
-            return apiRequest({ url: '/api/region', body: { id }, method: 'DELETE' });
+            return deleteRegion({id});
         },
         onSuccess:()=>{
             return queryClient.invalidateQueries({queryKey:['regions']});

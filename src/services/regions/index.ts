@@ -5,9 +5,9 @@ import { db } from "@/lib/db"
 export const addRegion = async ({ region }: { region: string }) => {
     try {
         const data =await db.region.create({ data: { region } });
-        return { success: true, data }
-    }catch (err) {
-        return {success:false,message:err}
+        return data;
+    }catch (e) {
+        throw new Error(e instanceof Error ? e.message : "Internal Server Error");
     }
 }
 
@@ -23,8 +23,8 @@ export const allRegion = async () => {
 export const deleteRegion=async({id}:{id:number})=>{
     try{
         const data=await db.region.delete({where:{id}});
-        return ({success:true,data});
-    }catch(err){
-        return({success:false,message:err})
+        return data;
+    }catch(e){
+        throw new Error(e instanceof Error ? e.message : "Internal Server Error");
     }
 }
