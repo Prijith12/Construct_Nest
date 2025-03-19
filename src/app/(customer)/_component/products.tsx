@@ -76,7 +76,7 @@ const ProductsCard = ({ name,price, image, unit, rating}: { name: string, price:
       </CardHeader>
       <CardContent className='pt-3'>
         <div className='w-full h-auto'>
-          <Image src={`${image}`} alt='..'  width={600} height={600} className='w-full h-full object-cover rounded-sm' />
+          <Image src={image||'/home-page-img3.png'} alt='..'  width={600} height={600} className='w-full h-full object-cover rounded-sm' />
         </div>
         <div className='my-4'>
           <div className='grid grid-cols-2 gap-2'>

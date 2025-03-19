@@ -76,7 +76,7 @@ const ServiceProvidersCard = ({ service, name, image, mobile, rating, isSubscrib
       </CardHeader>
       <CardContent className='pt-3'>
         <div className='w-full h-auto'>
-         <Image src={`${image}`} alt='..' width={600} height={600} className='w-full h-full object-cover rounded-sm' />        </div>
+         <Image src={image||'/home-page-img3.png'} alt='..' width={600} height={600} className='w-full h-full object-cover rounded-sm' />        </div>
         <div className='mt-4'>
           <div className='grid grid-cols-2 gap-2'>
             <Label className='font-medium'>Provider Name</Label>
