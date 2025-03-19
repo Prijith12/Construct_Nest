@@ -66,7 +66,7 @@ function ProvidersTable() {
                 const url=row.original.image
                 return(
                     <div className='flex w-16 h-14'>
-                    <Image src={`/${url}`}alt='...'width={100} height={100} className='text-center rounded-sm'/>
+                    <Image src={`${url}`}alt='...'width={100} height={100} className='text-center rounded-sm'/>
                     </div>
                 )
             }
