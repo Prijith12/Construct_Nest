@@ -20,7 +20,7 @@ import {
 import { useUser } from "@auth0/nextjs-auth0/client"
 import { CircleUserRound, Warehouse, LogOut, Menu } from "lucide-react"
 import { Spinner } from "./loading/Loading"
-
+import { revalidate } from "@/lib/revalidate"
 import Link from "next/link"
 import { Button } from "./ui/button"
 import { usePathname } from "next/navigation"
@@ -28,7 +28,14 @@ import { cn } from "@/lib/utils"
 import { useEffect, useState } from "react"
 
 
-
+const handleRevalidate=async()=>{
+    const response=await revalidate();
+    if(response){
+        window.location.reload();
+    }else{
+        alert("error revalidating the chached data");
+    }
+}
 
 export default function Nav({ children, backGround, navBarLinks }: { children?: React.ReactNode, backGround: string, navBarLinks: { href: string, label: string, scroll?: boolean }[] }) {
     const nameSpace = process.env.NEXT_PUBLIC_AUTH0_NAMESPACE;
@@ -88,7 +95,7 @@ export default function Nav({ children, backGround, navBarLinks }: { children?: 
 
 
 const AuthMenu = ({ loggedIn, name, email, isAdmin }: { loggedIn: boolean, name: string, email: string, isAdmin: boolean }) => {
-    const displayName = name.length > 8 ? `${name.slice(0, 2)}...` : name;
+    const displayName = loggedIn?name.length > 8 ? `${name.slice(0, 2)}...` : name:'';
     return (
         <div>
             {
@@ -147,17 +154,19 @@ const SideBar = ({ backGround, sideBarLinks, isAdmin }: { backGround: string, si
                         </h1>
                     </div>
                 </SheetHeader>
-                <div className="mt-10 flex flex-col border-t-2 border-blue-100">
+                <div className="mt-10 flex flex-col border-blue-100">
                     {sideBarLinks.length > 0 ? (
                         sideBarLinks.map((link, index) => (
+                            <div className="mb-1 border-t-2">
                             <SideBarLink backGround={backGround} href={link.href} key={link.href} scroll={link.scroll}>{link.label}</SideBarLink>
+                            </div>
                         ))
                     ) : <h1>Add sideBar Links</h1>
                     }
                     {
                         !path.includes('/admin') && isAdmin &&
                         <SheetClose asChild >
-                            <div className={cn("flex items-center justify-center w-full h-14  border-b-2 border-blue-100 rounded-sm hover:bg-gray-200 text-sm font-light text-black font-serif", backGround)}>
+                            <div className={cn("flex items-center border-t-2 justify-center w-full h-14  border-b-2 border-blue-100 rounded-sm hover:bg-gray-200 text-sm font-light text-black font-serif", backGround)}>
                                 <AdminLink isAdmin={isAdmin} isSideBar={true} />
                             </div>
                         </SheetClose>
@@ -172,8 +181,8 @@ const SideBarLink = ({ backGround, ...props }: { backGround: string } & Omit<Rea
     const path = usePathname()
     return (
         <SheetClose asChild>
-            <Link {...props} className={cn("flex items-center justify-center w-full h-14  border-b-2 border-blue-100 rounded-sm hover:bg-gray-200 text-sm font-light text-black font-serif", backGround,
-                path == props.href && "bg-gray-200 bg-opacity-55 text-gray-600 "
+            <Link {...props} className={cn("flex items-center justify-center w-full h-14 border-b-2 border-blue-100 rounded-sm hover:bg-gray-200 text-sm font-light text-black font-serif", backGround,
+                path == props.href && "bg-slate-100 bg-opacity-55 text-blue-600 "
             )} />
         </SheetClose>
     )
@@ -183,9 +192,17 @@ const AdminLink = ({ isAdmin, isSideBar }: { isAdmin: boolean, isSideBar: boolea
     const path = usePathname();
     return (
         <div>
-            {!path.includes('/admin') && isAdmin && <Link href='/admin' className={cn(!isSideBar ?
+            {!path.includes('/admin') && isAdmin && <><Link href='/admin' className={cn(!isSideBar ?
                 "text-sm font-light text-gray-500 hover:text-blue-600" : ''
-            )}>AdminPage</Link>}
+            )}>AdminPage</Link>
+            <Link href="/" onClick={(e)=>{
+                e.preventDefault();
+                handleRevalidate();
+            }} className={cn(!isSideBar ?
+                "text-sm ml-4 font-light text-gray-500 hover:text-blue-600" : ''
+            )}>{isSideBar?'/':''}Revalidate</Link> 
+            </> 
+            }
         </div>
     )
 }

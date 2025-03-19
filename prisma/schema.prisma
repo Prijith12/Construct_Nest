@@ -1,81 +1,74 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-
 model User {
-userId Int @id @default(autoincrement()) @map("user_id")
-userName String? 
-email String @unique
-role String 
-deletedAt DateTime? @map("deleted_at")
-createdAt DateTime @default(now()) @map("created_at")
-updatedAt DateTime? @updatedAt @map("updated_At")
-orders Order[]
-feedback FeedBack?
+  userId    Int       @id @default(autoincrement()) @map("user_id")
+  userName  String?
+  email     String    @unique
+  role      String
+  deletedAt DateTime? @map("deleted_at")
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_At")
+  feedback  FeedBack?
+  orders    Order[]
 }
 
 model ServiceProvider {
-  id Int @id @default(autoincrement()) 
-  name String
+  id      Int    @id @default(autoincrement())
+  name    String
   service String
-  mobile String
-  rating Int
-  image String
+  mobile  String
+  rating  Int
+  image   String
 }
 
 model Product {
-  productId Int @id @default(autoincrement())
-  name String 
-  price Int 
-  rating Int?
-  unit String?
-  image String
-  orders Order[]
+  productId Int     @id @default(autoincrement())
+  name      String
+  price     Int
+  rating    Int?
+  unit      String?
+  image     String
+  orders    Order?
 }
 
 model Order {
-  orderId Int @id @default(autoincrement())
-  userId Int 
-  user User @relation(fields: [userId],references: [userId])
+  orderId   Int     @id @default(autoincrement())
+  userId    Int
   productId Int
-  order Product @relation(fields: [orderId],references: [productId])
+  order     Product @relation(fields: [orderId], references: [productId])
+  user      User    @relation(fields: [userId], references: [userId])
 
-  @@unique([userId,productId])
+  @@unique([userId, productId])
 }
 
 model FeedBack {
-  id Int @id @default(autoincrement())
-  rating Int
+  id          Int     @id @default(autoincrement())
+  rating      Int
   descritpion String?
-  userId Int @unique
-  user User @relation(fields: [userId], references: [userId])
-
+  userId      Int     @unique
+  user        User    @relation(fields: [userId], references: [userId])
 }
 
 model Cards {
-  id Int @id @default(autoincrement())
-  category String
-  name String?
+  id          Int     @id @default(autoincrement())
+  category    String
+  name        String?
   description String?
-  imageUrl String @map("image_url")
-  // need more fields
+  imageUrl    String  @map("image_url")
 }
 
 model Post {
   id Int @id @default(autoincrement())
-  //need more fields
 }
 
 model Region {
-  id Int @id @default(autoincrement())
+  id     Int    @id @default(autoincrement())
   region String
 }

@@ -4,7 +4,7 @@ import { db } from "@/lib/db"
 import type { Providers } from "@/app/admin/service-providers/_components/providers-table"
 
 
-type Provider = Omit<Providers, 'id'> & { id?: number }
+export type Provider = Omit<Providers, 'id'> & { id?: number }
 
 export const addServiceProvider = async (provider: Provider) => {
     try {

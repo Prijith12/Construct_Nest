@@ -28,7 +28,7 @@ const productSchema=z.object({
   name:z.string().min(1,{message:"Name is Required"}),
   price:z.number({message:"Price is required"}).min(1,{message:"Price is required"}).nonnegative({message:"Price must be non negative value"}),
   rating:z.number().min(1).max(5),
-  unit:z.string().max(16,{message:"Unit detials can't exceed 8 characters"})
+  unit:z.string().max(36,{message:"Unit detials can't exceed 36 characters"})
 });
 
 function AddProduct() {

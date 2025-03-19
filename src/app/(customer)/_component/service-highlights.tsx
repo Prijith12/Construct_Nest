@@ -7,13 +7,14 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { MapPin } from "lucide-react";
+import type { Regions } from "@/app/admin/manage-regions/_components/regions-table";
 
-function ServiceHighlights() {
-  const regions=["Changanasheryy","Alappuzha","Ernakulam"]
+function ServiceHighlights({regions}:{regions:Regions[]}) {
+  //const regions=["Changanasheryy","Alappuzha","Ernakulam"]
   return (
     <div className="flex justify-center px-2">
       <div>
-    <div className="mt-16 md:mt-12 px-4 text-center">
+    <div className="mt-12 md:mt-10 px-4 text-center">
       <h1 className="py-2 md:py-4 text-2xl md:text-4xl font-serif font-extralight italic text-gray-700" id="regions">
         From dream homes to repairs, we’ve got you covered!
       </h1>
@@ -23,8 +24,8 @@ function ServiceHighlights() {
       </div>
       <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-4 ">
         {
-          regions.map((region,index)=>(
-            <LocationCard key={index}>{region}</LocationCard>
+          regions.map((data,index)=>(
+            <LocationCard key={index}>{data.region}</LocationCard>
           ))
         }
       </div>

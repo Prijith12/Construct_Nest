@@ -25,7 +25,7 @@ export default function Footer({ children }: { children: React.ReactNode }) {
     const partners=['Contractors','Material Suppliers'];
 
     return (
-        <div className="w-full min-h-32 bottom-0 bg-gray-600 font-serif mt-16 md:mt-1">
+        <div className="w-full min-h-32 bottom-0 bg-gray-600 font-serif mt-24 md:mt-32">
             <div className="px-4 py-7">
                 <div className="flex justify-between border-b-2 border-gray-500 min-h-20">
                     <div className="w-1/2 text-base md:text-lg  font-medium text-gray-100 mb-3 ">
