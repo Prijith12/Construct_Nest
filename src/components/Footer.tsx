@@ -9,9 +9,13 @@ import {
 import Link from "next/link"
 import React from "react"
 import { useQuery } from "@tanstack/react-query"
-import { fetchRegions } from "@/app/admin/manage-regions/page"
 import type { Regions } from "@/app/admin/manage-regions/_components/regions-table"
 import { Spinner } from "./loading/Loading"
+import { apiRequest } from "@/lib/api"
+
+const fetchRegions = async () => {
+    return apiRequest({ url: '/api/region' });
+}
 
 export default function Footer({ children }: { children: React.ReactNode }) {
 
