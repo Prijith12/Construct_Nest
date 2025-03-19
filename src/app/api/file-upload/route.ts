@@ -10,17 +10,14 @@ export const POST = async (req: NextRequest) => {
       return NextResponse.json({ error: "No files received." }, { status: 400 });
     }
 
-    // Convert file to Buffer
     const buffer = Buffer.from(await file.arrayBuffer());
 
-    // Generate unique filename
     const currentDate = new Date().toISOString().replace(/:/g, '-');
     const fileName = `${currentDate}.jpeg`;
 
-    // Upload file to Vercel Blob Storage
     const blob = await put(fileName, buffer, {
-      access: "public", // Make file publicly accessible
-      token: process.env.BLOB_READ_WRITE_TOKEN, // Explicitly provide the token
+      access: "public", 
+      token: process.env.BLOB_READ_WRITE_TOKEN, 
     });
 
     return NextResponse.json({ message: "Success", fileName: blob.url }, { status: 201 });
