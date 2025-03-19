@@ -11,9 +11,34 @@ const fontSans = FontSans({
   variable: "--font-sans",
 })
 
+
 export const metadata: Metadata = {
-  title: "ConstructNest | Home Construction & Services in Kerala",
-  description: "ConstructNest offers complete home construction services in Kerala, from building materials to skilled workers. Your one-stop home solutions provider.",
+  title: "ConstructNest - Build Your Dream Home in Kerala",
+  description: "ConstructNest provides affordable home construction services in Kerala. Get top-quality materials, skilled contractors, and everything needed to build your house at the best price.",
+  keywords: "home construction Kerala, Kerala builders, building materials Kerala, house contractors Kerala, plumbing services Kerala, electrician services Kerala, buy bricks Kerala, affordable home building Kerala, house renovation Kerala",
+  openGraph: {
+    title: "ConstructNest - Your Home Construction Partner in Kerala",
+    description: "Find top-quality building materials, hire skilled contractors, and get complete home construction services in Kerala.",
+    url: "https://construct-nest-ng7c-two.vercel.app",
+    siteName: "ConstructNest",
+    images: [
+      {
+        url: "https://yvihkbfh9232cvoj.public.blob.vercel-storage.com/2025-03-19T21-01-39.498Z-HWlL5LwpUxmgcoUZaZD7dbE7idFVfT.jpeg",
+        width: 1200,
+        height: 630,
+        alt: "ConstructNest Homepage",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@constructnest",
+    title: "ConstructNest - Build Your Dream Home in Kerala",
+    description: "One-stop home construction solutions in Kerala. Get building materials, expert contractors, and affordable services.",
+    images: ["https://yvihkbfh9232cvoj.public.blob.vercel-storage.com/2025-03-19T21-01-39.498Z-HWlL5LwpUxmgcoUZaZD7dbE7idFVfT.jpeg"],
+  },
+  robots: "index, follow",
 };
 
 export default function RootLayout({
