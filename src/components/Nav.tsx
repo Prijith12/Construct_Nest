@@ -26,7 +26,7 @@ import { Button } from "./ui/button"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { useEffect, useState } from "react"
-
+import ContactUs from "./contact-us"
 
 const handleRevalidate=async()=>{
     const response=await revalidate();
@@ -114,7 +114,7 @@ const AuthMenu = ({ loggedIn, name, email, isAdmin }: { loggedIn: boolean, name:
                                 <DropdownMenuLabel>{email}</DropdownMenuLabel>
                                 <DropdownMenuSeparator />
                                 <DropdownMenuItem><Link href="/profile">profile</Link></DropdownMenuItem>
-                                <DropdownMenuItem><Link href='/api/auth/logout?returnTo=/&federated'><LogOut className="pr-3" />Log out</Link></DropdownMenuItem>
+                                <DropdownMenuItem><Link href='/api/auth/logout'><LogOut className="pr-3" />Log out</Link></DropdownMenuItem>
 
                             </DropdownMenuContent>
                         </DropdownMenu>
@@ -171,6 +171,9 @@ const SideBar = ({ backGround, sideBarLinks, isAdmin }: { backGround: string, si
                             </div>
                         </SheetClose>
                     }
+                </div>
+                <div className="mt-5">
+                    <ContactUs/>
                 </div>
             </SheetContent>
         </Sheet>

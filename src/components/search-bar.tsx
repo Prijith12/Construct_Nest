@@ -1,6 +1,7 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Search } from "lucide-react"; 
+import { Search } from "lucide-react";
+
 
 export function SearchBar({onClick}:{onClick:(e:React.MouseEvent<HTMLButtonElement>)=>void}) {
   return (
@@ -13,7 +14,7 @@ export function SearchBar({onClick}:{onClick:(e:React.MouseEvent<HTMLButtonEleme
           className="pl-10 pr-4 py-2 rounded-lg border-none focus:ring-0 w-full"
         />
       </div>
-      <Button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition-all" onClick={onClick}>
+      <Button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition-all hover:scale-105" onClick={onClick}>
         View Products
       </Button>
     </div>
