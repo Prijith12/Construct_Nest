@@ -51,11 +51,11 @@ export default function ContactUs() {
     };
 
     return (
-        <div className="flex justify-center pt-4 px-2">
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} transition={{ type: "spring", stiffness: 300 }}>
+        <div className="flex justify-center pt-4 px-2 ">
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} transition={{ type: "spring", stiffness: 300 }} className="overflow-hidden rounded-full">
                 <Button
                     onClick={() => setOpen(true)}
-                    className="bg-gradient-to-r from-blue-600 to-purple-500 text-white px-6 py-3 rounded-lg text-lg font-medium shadow-lg hover:shadow-xl transition-all"
+                    className="bg-gradient-to-r from-blue-600 to-purple-500 text-white px-6 py-3 rounded-full text-lg font-medium shadow-lg hover:shadow-xl transition-all focus:outline-none"
                 >
                     Contact Us
                 </Button>

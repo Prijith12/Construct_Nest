@@ -28,11 +28,11 @@ import { cn } from "@/lib/utils"
 import { useEffect, useState } from "react"
 import ContactUs from "./contact-us"
 
-const handleRevalidate=async()=>{
-    const response=await revalidate();
-    if(response){
+const handleRevalidate = async () => {
+    const response = await revalidate();
+    if (response) {
         window.location.reload();
-    }else{
+    } else {
         alert("error revalidating the chached data");
     }
 }
@@ -95,7 +95,7 @@ export default function Nav({ children, backGround, navBarLinks }: { children?: 
 
 
 const AuthMenu = ({ loggedIn, name, email, isAdmin }: { loggedIn: boolean, name: string, email: string, isAdmin: boolean }) => {
-    const displayName = loggedIn?name.length > 8 ? `${name.slice(0, 2)}...` : name:'';
+    const displayName = loggedIn ? name.length > 8 ? `${name.slice(0, 2)}...` : name : '';
     return (
         <div>
             {
@@ -158,7 +158,7 @@ const SideBar = ({ backGround, sideBarLinks, isAdmin }: { backGround: string, si
                     {sideBarLinks.length > 0 ? (
                         sideBarLinks.map((link, index) => (
                             <div className="mb-1 border-t-2">
-                            <SideBarLink backGround={backGround} href={link.href} key={link.href} scroll={link.scroll}>{link.label}</SideBarLink>
+                                <SideBarLink backGround={backGround} href={link.href} key={link.href} scroll={link.scroll}>{link.label}</SideBarLink>
                             </div>
                         ))
                     ) : <h1>Add sideBar Links</h1>
@@ -172,8 +172,8 @@ const SideBar = ({ backGround, sideBarLinks, isAdmin }: { backGround: string, si
                         </SheetClose>
                     }
                 </div>
-                <div className="mt-5">
-                    <ContactUs/>
+                <div className="mt-5 border-none">
+                    <ContactUs />
                 </div>
             </SheetContent>
         </Sheet>
@@ -198,13 +198,13 @@ const AdminLink = ({ isAdmin, isSideBar }: { isAdmin: boolean, isSideBar: boolea
             {!path.includes('/admin') && isAdmin && <><Link href='/admin' className={cn(!isSideBar ?
                 "text-sm font-light text-gray-500 hover:text-blue-600" : ''
             )}>AdminPage</Link>
-            <Link href="/" onClick={(e)=>{
-                e.preventDefault();
-                handleRevalidate();
-            }} className={cn(!isSideBar ?
-                "text-sm ml-4 font-light text-gray-500 hover:text-blue-600" : ''
-            )}>{isSideBar?'/':''}Revalidate</Link> 
-            </> 
+                <Link href="/" onClick={(e) => {
+                    e.preventDefault();
+                    handleRevalidate();
+                }} className={cn(!isSideBar ?
+                    "text-sm ml-4 font-light text-gray-500 hover:text-blue-600" : ''
+                )}>{isSideBar ? '/' : ''}Revalidate</Link>
+            </>
             }
         </div>
     )
