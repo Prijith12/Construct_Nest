@@ -78,6 +78,7 @@ const ServiceProvidersCard = ({ service, name, image, mobile, rating, isSubscrib
     whileHover={{ scale: 1.02, boxShadow: "0px 5px 15px rgba(0, 0, 0, 0.1)" }}
     transition={{ duration: 0.3 }}
     className="relative"
+    style={{ pointerEvents: "none" }}
   >
     <motion.div
       animate={{ scale: [1, 1.01, 1] }}
@@ -91,7 +92,7 @@ const ServiceProvidersCard = ({ service, name, image, mobile, rating, isSubscrib
       </CardHeader>
       <CardContent className='pt-3'>
         <motion.div
-          animate={{ y: [0, -9, 0] }}
+          animate={{ y: [0, -7, 0] }}
           transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
           className="overflow-hidden rounded-md"
         >
@@ -117,7 +118,7 @@ const ServiceProvidersCard = ({ service, name, image, mobile, rating, isSubscrib
           <p className="text-xs text-red-500 mt-2">Subscribe to view Mobile Number</p>
         )}
         <StarRating rating={rating} />
-        <Button className='bg-blue-700 mt-4 hover:bg-blue-800' onClick={() => { setOpen(true) }}>Connect With Provider</Button>
+        <Button className='bg-blue-700 mt-4 hover:bg-blue-800' onClick={() => { setOpen(true) }} style={{ pointerEvents: "auto" }}>Connect With Provider</Button>
         <ProviderDialog formData={formData} service={service} isLoading={isLoading} open={open} setOpen={setOpen} setFormData={setFormData} handleSubmit={handleSubmit} />
       </CardContent>
     </Card>

@@ -80,6 +80,7 @@ const ProductsCard = ({ name,price, image, unit, rating}: { name: string, price:
   }}
   transition={{ duration: 0.3 }}
   className="relative"
+  style={{ pointerEvents: "none" }}
 >
 
   <motion.div
@@ -118,7 +119,7 @@ const ProductsCard = ({ name,price, image, unit, rating}: { name: string, price:
 
       <StarRating rating={rating || 5} />
 
-      <Button className='bg-blue-700 mt-4 hover:bg-blue-800' onClick={() => setOpen(true)}>Buy Product</Button>
+      <Button className='bg-blue-700 mt-4 hover:bg-blue-800' onClick={() => setOpen(true)} style={{ pointerEvents: "auto" }}>Buy Product</Button>
 
       <ProductDialog formData={formData} isLoading={isLoading} open={open} product={name} setFormData={setFormData} setOpen={setOpen} handleSubmit={handleSubmit} />
     </CardContent>
@@ -158,7 +159,7 @@ const ProductDialog = ({ open, setOpen, formData, setFormData, isLoading, handle
             onChange={(e) => setFormData({ ...formData, mobile: e.target.value })}
 
           />
-          <Button className="w-full mt-2 bg-blue-600 text-white" onClick={handleSubmit} disabled={isLoading ? true : false}>
+          <Button className="w-full mt-2 bg-blue-600 text-white" onClick={handleSubmit} disabled={isLoading ? true : false} >
             Submit
           </Button>
         </div>
