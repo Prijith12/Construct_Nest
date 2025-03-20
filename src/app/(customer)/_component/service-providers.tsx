@@ -19,6 +19,8 @@ import { Input } from '@/components/ui/input'
 import { toast } from "sonner";
 import { z } from "zod";
 import { sendEmail } from '@/lib/email'
+import { motion } from 'framer-motion'
+
 
 const providerSchema = z.object({
     name: z.string().min(2, "Name must be at least 2 characters"),
@@ -70,14 +72,37 @@ const ServiceProvidersCard = ({ service, name, image, mobile, rating, isSubscrib
     }
   }
   return (
+    <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    whileHover={{ scale: 1.02, boxShadow: "0px 5px 15px rgba(0, 0, 0, 0.1)" }}
+    transition={{ duration: 0.3 }}
+    className="relative"
+  >
+    <motion.div
+      animate={{ scale: [1, 1.01, 1] }}
+      transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+      className="absolute inset-0"
+    />
+
     <Card className='w-auto h-auto'>
       <CardHeader>
         <CardTitle>{service}</CardTitle>
       </CardHeader>
       <CardContent className='pt-3'>
-        <div className='w-full h-auto'>
-         <Image src={image||'/home-page-img3.png'} alt='..' width={600} height={600} className='w-full h-full object-cover rounded-sm' />        </div>
-        <div className='mt-4'>
+        <motion.div
+          animate={{ y: [0, -9, 0] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          className="overflow-hidden rounded-md"
+        >
+          <Image src={image || '/home-page-img3.png'} alt='..' width={600} height={600} className='w-full h-full object-cover rounded-sm' />
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.4 }}
+          className="mt-4"
+        >
           <div className='grid grid-cols-2 gap-2'>
             <Label className='font-medium'>Provider Name</Label>
             <Label>: {name}</Label>
@@ -87,15 +112,16 @@ const ServiceProvidersCard = ({ service, name, image, mobile, rating, isSubscrib
               {!isSubscribed && <Lock size={14} className="text-gray-500" />}
             </div>
           </div>
-        </div>
+        </motion.div>
         {!isSubscribed && (
           <p className="text-xs text-red-500 mt-2">Subscribe to view Mobile Number</p>
         )}
         <StarRating rating={rating} />
-        <Button className='bg-blue-700 mt-4 hover:bg-blue-800' onClick={()=>{setOpen(true)}}>Connect With Provider</Button>
+        <Button className='bg-blue-700 mt-4 hover:bg-blue-800' onClick={() => { setOpen(true) }}>Connect With Provider</Button>
         <ProviderDialog formData={formData} service={service} isLoading={isLoading} open={open} setOpen={setOpen} setFormData={setFormData} handleSubmit={handleSubmit} />
       </CardContent>
     </Card>
+  </motion.div>
   )
 }
 

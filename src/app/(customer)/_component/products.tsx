@@ -19,6 +19,7 @@ import { Input } from '@/components/ui/input'
 import { toast } from 'sonner'
 import { sendEmail } from '@/lib/email'
 import z from 'zod'
+import { motion } from 'framer-motion'
 
 const productSchema = z.object({
     name: z.string().min(2, "Name must be at least 2 characters"),
@@ -70,27 +71,60 @@ const ProductsCard = ({ name,price, image, unit, rating}: { name: string, price:
     }
 
   return (
-    <Card className='w-auto h-auto'>
-      <CardHeader>
-        <CardTitle>{name}</CardTitle>
-      </CardHeader>
-      <CardContent className='pt-3'>
-        <div className='w-full h-auto'>
-          <Image src={image||'/home-page-img3.png'} alt='..'  width={600} height={600} className='w-full h-full object-cover rounded-sm' />
+    <motion.div
+  initial={{ opacity: 0, y: 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  whileHover={{
+    scale: 1.02,
+    boxShadow: "0px 5px 15px rgba(0, 0, 0, 0.1)"
+  }}
+  transition={{ duration: 0.3 }}
+  className="relative"
+>
+
+  <motion.div
+    animate={{ scale: [1, 1.01, 1] }} 
+    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }} 
+    className="absolute inset-0"
+  />
+
+  <Card className='w-auto h-auto rounded-xl overflow-hidden'>
+    <CardHeader>
+      <CardTitle>{name}</CardTitle>
+    </CardHeader>
+    <CardContent className='pt-3'>
+
+      <motion.div
+        animate={{ y: [0, -9, 0] }} 
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+        className="overflow-hidden rounded-md"
+      >
+        <Image src={image || '/home-page-img3.png'} alt='..' width={600} height={600} className='w-full h-full object-cover' />
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2, duration: 0.4 }}
+        className="my-4"
+      >
+        <div className='grid grid-cols-2 gap-2'>
+          <Label className='font-medium'>Price</Label>
+          <Label>:{price}</Label>
+          <Label className='font-medium'>Unit</Label>
+          <Label>:{unit}</Label>
         </div>
-        <div className='my-4'>
-          <div className='grid grid-cols-2 gap-2'>
-            <Label className='font-medium'>Price</Label>
-            <Label>:{price}</Label>
-            <Label className='font-medium'>Unit</Label>
-            <Label>:{unit}</Label>
-          </div>
-        </div>
-        <StarRating rating={rating||5}/>
-        <Button className='bg-blue-700 mt-4 hover:bg-blue-800' onClick={()=>setOpen(true)}>Buy Product</Button>
-        <ProductDialog formData={formData} isLoading={isLoading} open={open} product={name} setFormData={setFormData} setOpen={setOpen} handleSubmit={handleSubmit}/>
-      </CardContent>
-    </Card>
+      </motion.div>
+
+      <StarRating rating={rating || 5} />
+
+      <Button className='bg-blue-700 mt-4 hover:bg-blue-800' onClick={() => setOpen(true)}>Buy Product</Button>
+
+      <ProductDialog formData={formData} isLoading={isLoading} open={open} product={name} setFormData={setFormData} setOpen={setOpen} handleSubmit={handleSubmit} />
+    </CardContent>
+  </Card>
+</motion.div>
+
   )
 }
 
